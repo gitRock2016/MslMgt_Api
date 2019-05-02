@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.muscle.service.MslMgtService;
+
 @RestController
 public class MslMgtController {
 	
@@ -18,17 +20,13 @@ public class MslMgtController {
 			@RequestParam("weight") String weight,
 			@RequestParam("age") String age) {
 		
+		// 動作確認レベルなので固定値で計算しとく
+		MslMgtService mslMgtService = new MslMgtService(163d, 63d, 32);
+		String basic = mslMgtService.getBasicMetabolismFormat();
 		
-		HashMap<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.put("height", "163");
-		hashMap.put("weight", "63");
-		hashMap.put("age", "32");
-		
-		// https://dietgenius.jp/macro-nutrient-calculator/
 		HashMap<String, Object> resp = new HashMap<String, Object>();
 		resp.put("status", "OK");
-		resp.put("basicMetabolism", "1493.75");
-		
+		resp.put("basicMetabolism", basic);
 		
 		return 	resp;
 	}
