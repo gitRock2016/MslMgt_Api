@@ -3,6 +3,8 @@ package com.muscle.service;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.math.BigDecimal;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,16 +15,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 public class MslMgtServiceTest{
 
+	MslMgtService mslmgt;
+	
 	@Before
 	public void setup() {
-		
+		this.mslmgt = new MslMgtServiceImpl();
 	}
 	
+	
 	@Test
-	public void tst_getBasicMetabolismFormat() {
-		MslMgtService mslMgtService = new MslMgtService(163d, 63d, 32);
-		String basic = mslMgtService.getBasicMetabolismFormat();
+	public void tst_basicMetabolismFormat() {
+		String name = "iwatakhr";
 		
-		assertThat(basic, is("1493.75"));
+		String basic = this.mslmgt.getBasalMetabolism(name);
+		
+		assertThat(basic, is("1489.9"));
 	}
+
 }

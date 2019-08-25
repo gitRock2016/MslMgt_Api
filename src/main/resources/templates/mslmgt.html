@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>筋トレ</title>
+<script type="text/javascript" th:src="@{/webjars/jquery/1.12.4/jquery.min.js}"></script>
+<script>
+
+$(function(){
+	$('#recordBtn').on('click',function(){
+		let target=$('form#recordForm');
+		let url1='http://localhost:18080/input';
+		target.attr('action',url1);
+		target.submit();
+		
+	});
+	
+	$('#aggreBtn').on('click',function(){
+		let target=$('form#aggreForm');
+		let url2='http://localhost:18080/total';
+		target.attr('action',url2);
+		target.submit();
+	})
+	
+	
+});
+
+</script>
+</head>
+<body>
+	<h2>リクエスト発行よう画面</h2>
+	<h3>勤怠管理システム</h3>
+	<h4>勤怠記録</h4>
+	<form id="recordForm" method="GET">
+		data:<input type="text" name="data" />例: 20170101
+		start:<input type="text" name="start" />例: 0900
+		end:<input type="text" name="end" />例: 1800
+		<br><input type="button" id="recordBtn"value="勤怠記録">
+	</form>
+	<h4>勤怠集計</h4>
+	<form id="aggreForm" method="GET">
+		year_month:<input type="text" name="year_month" />例: 201701
+		<br><input type="button" id="aggreBtn"value="勤怠集計">
+	</form>
+
+</body>
+</html>
