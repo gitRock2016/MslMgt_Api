@@ -12,11 +12,18 @@ import com.muscle.service.MslMgtService;
 import com.muscle.service.MslMgtServiceImpl;
 import com.muscle.service.response.BasalMetabolismResponse;
 
+@RequestMapping(value = "/MslMgt/api")
 @RestController
 public class MslMgtController {
-
+	
+	// TODO Autowiredの各場所がコンストラクタになっていた。いつもフィールドにつけていたが、どこが正しいのか？
+	// https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started-first-application-annotations
+	private final MslMgtService mslMgtService;
+	
 	@Autowired
-	private final MslMgtService mslMgtService = new MslMgtServiceImpl();
+	public MslMgtController(MslMgtServiceImpl mslMgtService) {
+		this.mslMgtService = mslMgtService;
+	}
 
 	@RequestMapping(value = "/basalMetabolism", method = RequestMethod.GET)
 	public Map<String, Object> basalMetabolism(@RequestParam("name") String name) {

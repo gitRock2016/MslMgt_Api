@@ -1,4 +1,4 @@
-package domain;
+package com.muscle.domain;
 
 import java.math.BigDecimal;
 
