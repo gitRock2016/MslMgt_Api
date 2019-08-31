@@ -1,24 +1,26 @@
 package com.muscle.service;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.muscle.repository.PersonalMapper;
 import com.muscle.repository.entity.PersonalEntity;
 
 
+@RunWith(SpringRunner.class)
 public class MslMgtServiceTest{
-
+	
 	MslMgtServiceImpl mslmgt;
 	
 	@MockBean
@@ -30,7 +32,6 @@ public class MslMgtServiceTest{
 	}
 	
 	
-	// TODO モックを利用してテストできるようにする
 	@Test
 	public void tst_basicMetabolismFormat() {
 		// テストパラメータ
@@ -46,7 +47,7 @@ public class MslMgtServiceTest{
 		e1.setActivity(0);
 		e1.setGoal(2);
 		List<PersonalEntity> arrayList = new ArrayList<PersonalEntity>();
-		arrayList.set(0, e1);
+		arrayList.add(e1);
 		
 		Mockito.when(pmapper.selectByName(name)).thenReturn(arrayList);	
 		Mockito.when(pmapper.selectById(any())).thenReturn(e1);
