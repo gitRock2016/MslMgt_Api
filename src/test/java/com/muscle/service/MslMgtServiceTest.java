@@ -43,6 +43,7 @@ public class MslMgtServiceTest{
 		e1.setName(name);
 		e1.setHeight(160.3d);
 		e1.setWeight(64.3d);
+		e1.setSex(1);
 		e1.setAge(32);
 		e1.setActivity(0);
 		e1.setGoal(2);

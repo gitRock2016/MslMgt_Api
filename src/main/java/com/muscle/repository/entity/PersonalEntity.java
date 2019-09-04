@@ -5,6 +5,7 @@ public class PersonalEntity {
 	private String name;
 	private double height;
 	private double weight;
+	private Integer sex;
 	private Integer age;
 	private Integer activity;
 	private Integer goal;
@@ -32,6 +33,12 @@ public class PersonalEntity {
 	}
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+	public Integer getSex() {
+		return sex;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
 	}
 	public Integer getAge() {
 		return age;

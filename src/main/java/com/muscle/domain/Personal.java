@@ -5,28 +5,32 @@ import java.math.BigDecimal;
 public class Personal {
 	private final double height;
 	private final double weight;
+	private final Integer sex;
 	private final Integer age;
 	private final Integer activitity;
 	private final Integer goal;
 	private final double basalMetabolism;
 	
 	
-	public Personal(double height, double weight, Integer age, Integer activitity, Integer goal) {
+	public Personal(double height, double weight, Integer sex,Integer age, Integer activitity, Integer goal) {
 		super();
 		this.height = height;
 		this.weight = weight;
+		this.sex = sex;
 		this.age = age;
 		this.activitity = activitity;
 		this.goal = goal;
 		this.basalMetabolism = makeBasalMetabolism(this.height,this.weight,this.age);
 	}
 	
-	
 	public double getHeight() {
 		return height;
 	}
 	public double getWeight() {
 		return weight;
+	}
+	public Integer getSex() {
+		return sex;
 	}
 	public Integer getAge() {
 		return age;
