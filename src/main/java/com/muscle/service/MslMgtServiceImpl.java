@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.muscle.domain.Personal;
 import com.muscle.repository.PersonalMapper;
+import com.muscle.repository.entity.DBCode;
 import com.muscle.repository.entity.PersonalEntity;
 
 @Service
@@ -24,7 +25,12 @@ public class MslMgtServiceImpl implements MslMgtService {
 	public String getBasalMetabolism(String name) {
 		
 		PersonalEntity pe = this.findPersonalByName(name);
-		Personal p = new Personal(pe.getHeight(),pe.getWeight(),pe.getSex(),pe.getAge(),pe.getActivity(),pe.getGoal());
+		Personal p = new Personal( pe.getHeight()
+												, pe.getWeight()
+												, DBCode.getPersonalSex(pe.getSex())
+												, pe.getAge()
+												, DBCode.getPersonalActivity(pe.getActivity())
+												, pe.getGoal());
 		//	sample
 		// Personal p = new Personal(160.3,64.3,32,0,2);
 		String basalmetabolism = String.valueOf(p.getBasalMetabolism()); 

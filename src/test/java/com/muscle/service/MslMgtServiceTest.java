@@ -31,7 +31,7 @@ public class MslMgtServiceTest{
 		this.mslmgt = new MslMgtServiceImpl(pmapper);
 	}
 	
-	
+	// 基礎代謝の計算（男）
 	@Test
 	public void tst_basicMetabolismFormat() {
 		// テストパラメータ
@@ -43,9 +43,9 @@ public class MslMgtServiceTest{
 		e1.setName(name);
 		e1.setHeight(160.3d);
 		e1.setWeight(64.3d);
-		e1.setSex(1);
+		e1.setSex(1); // 男
 		e1.setAge(32);
-		e1.setActivity(0);
+		e1.setActivity(0); // 低
 		e1.setGoal(2);
 		List<PersonalEntity> arrayList = new ArrayList<PersonalEntity>();
 		arrayList.add(e1);

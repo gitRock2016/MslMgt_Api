@@ -5,14 +5,12 @@ import java.math.BigDecimal;
 public class Personal {
 	private final double height;
 	private final double weight;
-	private final Integer sex;
 	private final Integer age;
-	private final Integer activitity;
+	private final Activitity activitity;
 	private final Integer goal;
-	private final double basalMetabolism;
+	private final Sex sex;
 	
-	
-	public Personal(double height, double weight, Integer sex,Integer age, Integer activitity, Integer goal) {
+	public Personal(double height, double weight, Sex sex,Integer age, Activitity activitity, Integer goal) {
 		super();
 		this.height = height;
 		this.weight = weight;
@@ -20,7 +18,23 @@ public class Personal {
 		this.age = age;
 		this.activitity = activitity;
 		this.goal = goal;
-		this.basalMetabolism = makeBasalMetabolism(this.height,this.weight,this.age);
+	}
+	
+	public enum Sex {
+		Man, Woman;
+	}
+
+	public enum Activitity {
+		High(1.7d), Normal(1.6d), Low(1.2d);
+		private final double value;
+
+		private Activitity(final double value) {
+			this.value = value;
+		}
+
+		public double getValue() {
+			return value;
+		}
 	}
 	
 	public double getHeight() {
@@ -29,37 +43,35 @@ public class Personal {
 	public double getWeight() {
 		return weight;
 	}
-	public Integer getSex() {
+	public Sex getSex() {
 		return sex;
 	}
 	public Integer getAge() {
 		return age;
 	}
-	public Integer getActivitity() {
+	public Activitity getActivitity() {
 		return activitity;
 	}
 	public Integer getGoal() {
 		return goal;
 	}
-	public BigDecimal getBasalMetabolism() {
-		return this.toValue(this.basalMetabolism);
-	}
-	
-	
-	public BigDecimal getCostCaloriesPerDay() {
-		// TODO enumなど利用して動的にしたい
-		//０⇒１．２、１⇒１．６、２⇒１．７
-		double act = 0;
-		if (Integer.valueOf(0).equals(this.activitity))	act = 1.2;
-		if (Integer.valueOf(1).equals(this.activitity))	act = 1.6;
-		if (Integer.valueOf(2).equals(this.activitity))	act = 1.7;
 
-		double c = this.basalMetabolism * act;
+	// 1日当たりの消費カロリー
+	public BigDecimal getCostCaloriesPerDay() {
+		double c = this.makeBasalMetabolism() * this.activitity.getValue();
 		return this.toValue(c);
 	}
 	
-	private double makeBasalMetabolism(double height, double weiht, Integer age) {
-		return 10d * weight + 6.25d * height - 5d * age + 5d;
+	// 基礎代謝
+	public BigDecimal getBasalMetabolism() {
+		return this.toValue(makeBasalMetabolism());
+	}
+	private double makeBasalMetabolism() {
+		if (Sex.Man.equals(this.sex))
+			return 10d * this.weight + 6.25d * this.height - 5d * this.age + 5d;
+		if (Sex.Woman.equals(this.sex))
+			return 10d * this.weight + 6.25d * this.height - 5d * this.age - 161;
+		throw new IllegalArgumentException("性別の指定が男と女以外になっています");
 	}
 	
 	private BigDecimal toValue(double v) {
